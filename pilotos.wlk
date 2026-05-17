@@ -5,6 +5,7 @@ object asuka {
     var puntosDeEntrenamiento = 5
     var ultimoEvaSincronizado = eva00
 
+    method puntosDeEntrenamiento() = puntosDeEntrenamiento
     method efectoDeSincroCon(eva) { 
         ultimoEvaSincronizado = eva 
         puntosDeEntrenamiento += eva.puntosQueOtorga()
@@ -18,6 +19,7 @@ object shinji {
     var estaCansado = false
     const evasSincronizados = []
 
+    method puntosDeEntrenamiento() = puntosDeEntrenamiento
     method efectoDeSincroCon(eva) { 
         puntosDeEntrenamiento += eva.puntosQueOtorga()
         estaCansado = true
@@ -32,10 +34,12 @@ object rei {
     var puntosDeEntrenamiento = 0
     var cantidadSincros = 0
 
+    method puntosDeEntrenamiento() = puntosDeEntrenamiento
+    method cantidadSincros() = cantidadSincros
     method efectoDeSincroCon(eva) { 
         puntosDeEntrenamiento += eva.puntosQueOtorga()
         cantidadSincros += 1
     }
-    method puedeSincronizarCon(eva) = eva.puedeSincronizarCon(self) and eva.fuerzaAT() >= 2110 and cantidadSincros > 5
+    method puedeSincronizarCon(eva) = eva.puedeSincronizarCon(self) and eva.fuerzaAT() >= 2110 and cantidadSincros <= 5
     method estaSatisfecho() = cantidadSincros > 0
 }

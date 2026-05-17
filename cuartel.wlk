@@ -1,6 +1,9 @@
+import pilotos.*
+import evas.*
+
 object nerv {
-    const evas = []
-    const pilotos = []
+    const evas = [eva01, eva02, eva00]
+    const pilotos = [rei, shinji, asuka]
     
     method evas() = evas
     method pilotos() = pilotos
@@ -28,7 +31,11 @@ object nerv {
     method ordenarAPilotoSincronizarConTodos(unPiloto) {
         evas.forEach({ p => self.intentarSincro(p, unPiloto)})
     }
-    // El 5
+    method promedioPuntosDeEntrenamientoDePilotos() {return ( pilotos.sum({ p => p.puntosDeEntrenamiento()}) ) / (pilotos.size()) }
+    method pilotoConMasPuntosDeEntrenamiento() = pilotos.max({ p => p.puntosDeEntrenamiento() })
+    method valoresDeFuerzaATDeEvas() = evas.map({p => p.fuerzaAT()})
+    method evasEnCondicionesDeUsarsePor(unPiloto) = evas.filter({ p => p.puedeSincronizarCon(unPiloto)}) 
     method todosLosPilotosPuedenSincronizar() = pilotos.all({p => self.algunEvaPuedeSincronizarCon(p) })
     method algunEvaPuedeSincronizarCon(unPiloto) = evas.any({ e => self.puedenSincronizar(e, unPiloto) })
+    method estaSatisfechoElPiloto(unPiloto) = pilotos.contains(unPiloto) and unPiloto.estaSatisfecho()
 }
